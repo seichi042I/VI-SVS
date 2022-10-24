@@ -1,9 +1,4 @@
-VISinger/logs/singing_base/D*
-VISinger/logs/singing_base/G*
-VISinger/logs/singing_base/train.log
-VISinger/logs/singing_base/eval
-VISinger/logs/singing_base/e*
+VISinger_data/
+wav_44100Hz_phrase/
 VISinger/__pycache__/
-VISinger_data/label_vits/
-VISinger_data/wav_dump_16k
-**/*/__pycache__
+VISinger/resource
