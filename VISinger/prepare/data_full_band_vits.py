@@ -234,8 +234,8 @@ if __name__ == "__main__":
     notemaper = load_midi_map()
     logging.info(notemaper)
 
-    singInput = SingInput(16000, 256)
-    featureInput = FeatureInput("../VISinger_data/wav_dump_16k/", 16000, 256)
+    singInput = SingInput(44100, 512)
+    featureInput = FeatureInput("../VISinger_data/wav_44100Hz_phrase/", 44100, 512)
 
     if not os.path.exists("../VISinger_data/label_vits"):
         os.mkdir("../VISinger_data/label_vits")
@@ -333,7 +333,7 @@ if __name__ == "__main__":
         )
 
         # wave path|label path|label frame|score path|score duration;上面是一个.（当前目录），下面是两个..（从子目录调用）
-        path_wave = f"../VISinger_data/wav_dump_16k/{file}_bits16.wav"
+        path_wave = f"../VISinger_data/wav_44100Hz_phrase/{file}_bits16.wav"
         path_label = f"../VISinger_data/label_vits/{file}_label.npy"
         path_score = f"../VISinger_data/label_vits/{file}_score.npy"
         path_pitch = f"../VISinger_data/label_vits/{file}_pitch.npy"
