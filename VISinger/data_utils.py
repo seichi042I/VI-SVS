@@ -69,6 +69,8 @@ class TextAudioLoader(torch.utils.data.Dataset):
             len_min = min(len_phone, len_spec)
             # amor hop_size=256
             len_wav = len_min * 256
+            # amor hop_size=512
+            len_wav = len_min * 512
             # print(wav.size())
             # print(f"len_min={len_min}")
             # print(f"len_wav={len_wav}")
@@ -199,10 +201,6 @@ class DistributedBucketSampler(torch.utils.data.distributed.DistributedSampler):
     Maintain similar input lengths in a batch.
     Length groups are specified by boundaries.
     Ex) boundaries = [b1, b2, b3] -> any batch is included either {x | b1 < length(x) <=b2} or {x | b2 < length(x) <= b3}.
-<<<<<<< HEAD:VISinger/data_utils.py
-=======
-
->>>>>>> 86c21c0f0eaf39f3cef8ea34f0e681d7f38751a1:data_utils.py
     It removes samples which are not included in the boundaries.
     Ex) boundaries = [b1, b2, b3] -> any x s.t. length(x) <= b1 or length(x) > b3 are discarded.
     """
@@ -313,8 +311,4 @@ class DistributedBucketSampler(torch.utils.data.distributed.DistributedSampler):
             return -1
 
     def __len__(self):
-<<<<<<< HEAD:VISinger/data_utils.py
         return self.num_samples // self.batch_size
-=======
-        return self.num_samples // self.batch_size
->>>>>>> 86c21c0f0eaf39f3cef8ea34f0e681d7f38751a1:data_utils.py

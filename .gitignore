@@ -2,3 +2,5 @@ VISinger_data/
 wav_44100Hz_phrase/
 VISinger/__pycache__/
 VISinger/resource
+VISinger/split_songs_output
+VISinger/logs

@@ -31,6 +31,16 @@
     ],
     "configurations": [
         {
+            "name": "Python: full band train.py",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/seichi/VISinger/VI-SVS/VISinger/train.py",
+            "cwd": "${fileDirname}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": ["-c", "configs/singing_full_band.json","-m","singing_full_band"]
+        },
+        {
             "name": "split_song.py",
             "type": "python",
             "request": "launch",

@@ -72,9 +72,9 @@ class SingInput(object):
         sample_frame = []
         for i_ph in range(len(ph_durs)):
             count_frame = int(ph_durs[i_ph] * self.fs / self.hop + 0.5)
-            if count_frame >= 256:
+            if count_frame >= self.hop:
                 print("count_frame", count_frame)
-                count_frame = 255
+                count_frame = self.hop -1
             sample_frame.append(count_frame)
         return sample_frame
 
@@ -241,7 +241,7 @@ if __name__ == "__main__":
         os.mkdir("../VISinger_data/label_vits")
 
     fo = open("../VISinger_data/transcriptions.txt", "r+")
-    vits_file = open("./filelists/vits_file.txt", "w", encoding="utf-8")
+    vits_file = open("./filelists/vits_full_band_file.txt", "w", encoding="utf-8")
     i = 0
     all_txt = []  # 统计非重复的句子个数
     while True:
@@ -267,10 +267,10 @@ if __name__ == "__main__":
         phon_dur = infos[5].split(" ")
         phon_slur = infos[6].split(" ")
 
-        logging.info("----------------------------")
-        logging.info(file)
-        logging.info(hanz)
-        logging.info(phon)
+        # logging.info("----------------------------")
+        # logging.info(file)
+        # logging.info(hanz)
+        # logging.info(phon)
         # logging.info(note_dur)
         # logging.info(phon_dur)
         # logging.info(phon_slur)
@@ -291,6 +291,8 @@ if __name__ == "__main__":
             scores_dur[-1] += l_sum-s_sum
         elif s_sum > sum(labels_frames):
             scores_dur[-1] += l_sum-s_sum
+        print(file)
+        print(f'diff: {l_sum-s_sum}')
         print(sum(scores_dur) , sum(labels_frames))
 
         labels_ids = singInput.expandInput(labels_ids, labels_frames)
@@ -306,10 +308,10 @@ if __name__ == "__main__":
         # offset_pit = featureInput.diff_f0(scores_pit, featur_pit, labels_frames)
         assert len(labels_ids) == len(coarse_pit)
 
-        logging.info(labels_ids)
-        logging.info(scores_ids)
-        logging.info(coarse_pit)
-        logging.info(labels_slr)
+        # logging.info(labels_ids)
+        # logging.info(scores_ids)
+        # logging.info(coarse_pit)
+        # logging.info(labels_slr)
 
         np.save(
             f"../VISinger_data/label_vits/{file}_label.npy",
@@ -338,10 +340,11 @@ if __name__ == "__main__":
         path_score = f"../VISinger_data/label_vits/{file}_score.npy"
         path_pitch = f"../VISinger_data/label_vits/{file}_pitch.npy"
         path_slurs = f"../VISinger_data/label_vits/{file}_slurs.npy"
-        print(
-            f"{path_wave}|{path_label}|{path_score}|{path_pitch}|{path_slurs}",
-            file=vits_file,
-        )
+        # print(
+        #     f"{path_wave}|{path_label}|{path_score}|{path_pitch}|{path_slurs}",
+        #     file=vits_file,
+        # )
+        vits_file.write(f"{path_wave}|{path_label}|{path_score}|{path_pitch}|{path_slurs}\n")
 
     fo.close()
     vits_file.close()
